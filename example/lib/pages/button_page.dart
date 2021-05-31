@@ -12,7 +12,7 @@ class ButtonPage extends StatelessWidget {
       ),
       body: Container(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +32,7 @@ class ButtonPage extends StatelessWidget {
                   children: [
                     Button(
                       text: '主要按钮',
-                      type: buttonType.primary,
+                      type: ButtonType.primary,
                       borderRadius: 5,
                       onClick: () {
                         print('object');
@@ -40,22 +40,22 @@ class ButtonPage extends StatelessWidget {
                     ),
                     Button(
                       text: '主要按钮',
-                      type: buttonType.primary,
+                      type: ButtonType.primary,
                     ),
                     Button(
                       text: '信息按钮',
-                      type: buttonType.info,
+                      type: ButtonType.info,
                     ),
                     Button(
                       text: '默认按钮',
                     ),
                     Button(
                       text: '危险按钮',
-                      type: buttonType.danger,
+                      type: ButtonType.danger,
                     ),
                     Button(
                       text: '警告按钮',
-                      type: buttonType.warning,
+                      type: ButtonType.warning,
                     ),
                   ],
                 ),
@@ -74,7 +74,7 @@ class ButtonPage extends StatelessWidget {
                       Button(
                         text: '朴素按钮',
                         plain: true,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                         onClick: () {
                           print('object');
                         },
@@ -82,7 +82,7 @@ class ButtonPage extends StatelessWidget {
                       Button(
                         text: '朴素按钮',
                         plain: true,
-                        type: buttonType.info,
+                        type: ButtonType.info,
                       )
                     ]),
                 Padding(
@@ -101,13 +101,13 @@ class ButtonPage extends StatelessWidget {
                         text: '细边框按钮',
                         plain: true,
                         hairline: true,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '细边框按钮',
                         plain: true,
                         hairline: true,
-                        type: buttonType.info,
+                        type: ButtonType.info,
                       )
                     ]),
                 Padding(
@@ -125,12 +125,12 @@ class ButtonPage extends StatelessWidget {
                       Button(
                         text: '方形按钮',
                         square: true,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '圆形按钮',
                         round: true,
-                        type: buttonType.info,
+                        type: ButtonType.info,
                       )
                     ]),
                 Padding(
@@ -147,12 +147,12 @@ class ButtonPage extends StatelessWidget {
                     children: [
                       Button(
                         loading: true,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         loading: true,
                         loadingText: '加载中',
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                     ]),
                 Padding(
@@ -170,12 +170,12 @@ class ButtonPage extends StatelessWidget {
                       Button(
                         disabled: true,
                         text: '禁用状态',
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         disabled: true,
                         text: '禁用状态',
-                        type: buttonType.info,
+                        type: ButtonType.info,
                       ),
                     ]),
                 Padding(
@@ -192,24 +192,24 @@ class ButtonPage extends StatelessWidget {
                     children: [
                       Button(
                         icon: Icons.headset_sharp,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         icon: Icons.access_alarm,
                         text: '按钮',
-                        type: buttonType.info,
+                        type: ButtonType.info,
                       ),
                       Button(
                         icon: Icons.access_alarm,
                         text: '按钮',
-                        iconPosition: iconPositionEnum.right,
-                        type: buttonType.info,
+                        iconPosition: IconPositionEnum.right,
+                        type: ButtonType.info,
                       ),
                       Button(
                         icon: Icons.access_alarm,
                         text: '按钮',
                         plain: true,
-                        type: buttonType.info,
+                        type: ButtonType.info,
                       )
                     ]),
                 Padding(
@@ -226,23 +226,23 @@ class ButtonPage extends StatelessWidget {
                     children: [
                       Button(
                         text: '大号按钮',
-                        size: buttonSize.large,
-                        type: buttonType.primary,
+                        size: ButtonSize.large,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '中号按钮',
-                        size: buttonSize.normal,
-                        type: buttonType.primary,
+                        size: ButtonSize.normal,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '小号按钮',
-                        size: buttonSize.small,
-                        type: buttonType.primary,
+                        size: ButtonSize.small,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '迷你按钮',
-                        size: buttonSize.mini,
-                        type: buttonType.primary,
+                        size: ButtonSize.mini,
+                        type: ButtonType.primary,
                       ),
                     ]),
                 Padding(
@@ -260,8 +260,8 @@ class ButtonPage extends StatelessWidget {
                       Button(
                         text: '块级元素',
                         block: true,
-                        size: buttonSize.large,
-                        type: buttonType.primary,
+                        size: ButtonSize.large,
+                        type: ButtonType.primary,
                       )
                     ]),
                 Padding(
@@ -279,19 +279,19 @@ class ButtonPage extends StatelessWidget {
                       Button(
                         text: '自定义背景颜色',
                         color: Color(0xff00ff00),
-                        size: buttonSize.large,
-                        type: buttonType.primary,
+                        size: ButtonSize.large,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '自定义文本颜色',
                         textColor: Colors.blue,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '自定义背景颜色😻朴素按钮',
                         textColor: Color(0xff000fff),
                         plain: true,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '自定义颜色',
@@ -299,7 +299,7 @@ class ButtonPage extends StatelessWidget {
                         hairline: true,
                         round: true,
                         plain: true,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                       Button(
                         text: '渐变颜色',
@@ -308,7 +308,7 @@ class ButtonPage extends StatelessWidget {
                             end: Alignment.centerRight,
                             colors: [Colors.red, Colors.blue]),
                         textColor: Colors.orange,
-                        type: buttonType.primary,
+                        type: ButtonType.primary,
                       ),
                     ])
               ],

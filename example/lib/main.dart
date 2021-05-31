@@ -1,4 +1,5 @@
 import 'package:example/pages/button_page.dart';
+import 'package:example/pages/cell_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Flutter Vant'),
-      routes: {'/button': (context) => ButtonPage()},
+      routes: {
+        '/button': (context) => ButtonPage(),
+        '/cell': (context) => CellPage()
+      },
     );
   }
 }
@@ -53,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Cell(
                 title: 'Cell单元格',
-                onClick: () => {},
+                onClick: () => {Navigator.pushNamed(context, '/cell')},
               )
             ],
           ),

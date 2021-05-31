@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vant/src/style/style.dart';
 
 /// button type enum
-enum buttonType { primary, info, default_, warning, danger }
+enum ButtonType { primary, info, default_, warning, danger }
 
 /// button size enum
-enum buttonSize { large, normal, small, mini }
+enum ButtonSize { large, normal, small, mini }
 
 /// button color type enum
-enum buttonColorType { backgroundColor, textColor, borderColor }
+enum ButtonColorType { backgroundColor, textColor, borderColor }
 
 /// icon position
-enum iconPositionEnum { left, right }
+enum IconPositionEnum { left, right }
 
 class Button extends StatelessWidget {
   /// button text
   final String? text;
 
   /// button type
-  final buttonType type;
+  final ButtonType type;
 
   /// is plain button
   final bool plain;
 
   /// button size
-  final buttonSize size;
+  final ButtonSize size;
 
   /// is hairline button
   final bool hairline;
@@ -60,7 +60,7 @@ class Button extends StatelessWidget {
   final String? loadingText;
 
   /// button icon position [left, right]
-  final iconPositionEnum iconPosition;
+  final IconPositionEnum iconPosition;
 
   /// is disabled button
   final bool disabled;
@@ -68,9 +68,9 @@ class Button extends StatelessWidget {
   final Function? onClick;
   Button(
       {Key? key,
-      this.type: buttonType.default_,
+      this.type: ButtonType.default_,
       this.plain: false,
-      this.size: buttonSize.normal,
+      this.size: ButtonSize.normal,
       this.hairline: false,
       this.square: false,
       this.round: false,
@@ -82,59 +82,59 @@ class Button extends StatelessWidget {
       this.borderRadius: Style.buttonBorderRadius,
       this.loading: false,
       this.loadingText,
-      this.iconPosition: iconPositionEnum.left,
+      this.iconPosition: IconPositionEnum.left,
       this.disabled: false,
       this.onClick,
       this.text})
       : super(key: key);
 
-  Map<buttonType, dynamic> colors = {
-    buttonType.default_: <buttonColorType, Color>{
-      buttonColorType.backgroundColor: Style.buttonDefaultBgColor,
-      buttonColorType.borderColor: Style.buttonDefaultBdColor,
-      buttonColorType.textColor: Style.buttonDefaultColor
+  Map<ButtonType, dynamic> colors = {
+    ButtonType.default_: <ButtonColorType, Color>{
+      ButtonColorType.backgroundColor: Style.buttonDefaultBgColor,
+      ButtonColorType.borderColor: Style.buttonDefaultBdColor,
+      ButtonColorType.textColor: Style.buttonDefaultColor
     },
-    buttonType.primary: {
-      buttonColorType.backgroundColor: Style.buttonPrimaryBgColor,
-      buttonColorType.borderColor: Style.buttonPrimaryBdColor,
-      buttonColorType.textColor: Style.buttonPrimaryColor
+    ButtonType.primary: <ButtonColorType, Color>{
+      ButtonColorType.backgroundColor: Style.buttonPrimaryBgColor,
+      ButtonColorType.borderColor: Style.buttonPrimaryBdColor,
+      ButtonColorType.textColor: Style.buttonPrimaryColor
     },
-    buttonType.info: {
-      buttonColorType.backgroundColor: Style.buttonInfoBgColor,
-      buttonColorType.borderColor: Style.buttonInfoBdColor,
-      buttonColorType.textColor: Style.buttonInfoColor
+    ButtonType.info: <ButtonColorType, Color>{
+      ButtonColorType.backgroundColor: Style.buttonInfoBgColor,
+      ButtonColorType.borderColor: Style.buttonInfoBdColor,
+      ButtonColorType.textColor: Style.buttonInfoColor
     },
-    buttonType.danger: {
-      buttonColorType.backgroundColor: Style.buttonDangerBgColor,
-      buttonColorType.borderColor: Style.buttonDangerBdColor,
-      buttonColorType.textColor: Style.buttonDangerColor
+    ButtonType.danger: <ButtonColorType, Color>{
+      ButtonColorType.backgroundColor: Style.buttonDangerBgColor,
+      ButtonColorType.borderColor: Style.buttonDangerBdColor,
+      ButtonColorType.textColor: Style.buttonDangerColor
     },
-    buttonType.warning: {
-      buttonColorType.backgroundColor: Style.buttonWarningBgColor,
-      buttonColorType.borderColor: Style.buttonWarningBdColor,
-      buttonColorType.textColor: Style.buttonWarningColor
+    ButtonType.warning: <ButtonColorType, Color>{
+      ButtonColorType.backgroundColor: Style.buttonWarningBgColor,
+      ButtonColorType.borderColor: Style.buttonWarningBdColor,
+      ButtonColorType.textColor: Style.buttonWarningColor
     },
   };
 
-  Map<buttonSize, double> sizes = {
-    buttonSize.large: Style.buttonLargeHeight,
-    buttonSize.normal: Style.buttonNormalHeight,
-    buttonSize.small: Style.buttonSmallHeight,
-    buttonSize.mini: Style.buttonMiniHeight,
+  Map<ButtonSize, double> sizes = {
+    ButtonSize.large: Style.buttonLargeHeight,
+    ButtonSize.normal: Style.buttonNormalHeight,
+    ButtonSize.small: Style.buttonSmallHeight,
+    ButtonSize.mini: Style.buttonMiniHeight,
   };
 
-  Map<buttonSize, double> fontSizes = {
-    buttonSize.large: Style.buttonLargeFontSize,
-    buttonSize.normal: Style.buttonNormalFontSize,
-    buttonSize.small: Style.buttonSmallFontSize,
-    buttonSize.mini: Style.buttonMiniFontSize,
+  Map<ButtonSize, double> fontSizes = {
+    ButtonSize.large: Style.buttonLargeFontSize,
+    ButtonSize.normal: Style.buttonNormalFontSize,
+    ButtonSize.small: Style.buttonSmallFontSize,
+    ButtonSize.mini: Style.buttonMiniFontSize,
   };
 
-  Map<buttonSize, EdgeInsetsGeometry> paddings = {
-    buttonSize.large: Style.buttonLargePadding,
-    buttonSize.normal: Style.buttonNormalPadding,
-    buttonSize.small: Style.buttonSmallPadding,
-    buttonSize.mini: Style.buttonMiniPadding,
+  Map<ButtonSize, EdgeInsetsGeometry> paddings = {
+    ButtonSize.large: Style.buttonLargePadding,
+    ButtonSize.normal: Style.buttonNormalPadding,
+    ButtonSize.small: Style.buttonSmallPadding,
+    ButtonSize.mini: Style.buttonMiniPadding,
   };
 
   @override
@@ -162,7 +162,7 @@ class Button extends StatelessWidget {
       } else {
         bgColor = color != null
             ? color
-            : colors[type][buttonColorType.backgroundColor];
+            : colors[type][ButtonColorType.backgroundColor];
       }
     }
     // 前景色
@@ -170,11 +170,11 @@ class Button extends StatelessWidget {
     if (plain) {
       feColor = textColor != null
           ? textColor
-          : colors[type][buttonColorType.backgroundColor];
+          : colors[type][ButtonColorType.backgroundColor];
     } else {
       feColor = textColor != null
           ? textColor
-          : colors[type][buttonColorType.textColor];
+          : colors[type][ButtonColorType.textColor];
     }
     // 边框颜色
     Color? bdColor;
@@ -188,12 +188,12 @@ class Button extends StatelessWidget {
           if (textColor != null) {
             bdColor = textColor;
           } else {
-            bdColor = colors[type][buttonColorType.backgroundColor];
+            bdColor = colors[type][ButtonColorType.backgroundColor];
           }
         }
       } else {
         bdColor =
-            color != null ? color : colors[type][buttonColorType.borderColor];
+            color != null ? color : colors[type][ButtonColorType.borderColor];
       }
     }
 
@@ -216,12 +216,12 @@ class Button extends StatelessWidget {
               margin: EdgeInsets.only(
                   left: this.text == null
                       ? 0
-                      : iconPosition == iconPositionEnum.right
+                      : iconPosition == IconPositionEnum.right
                           ? 4
                           : 0,
                   right: this.text == null
                       ? 0
-                      : iconPosition == iconPositionEnum.left
+                      : iconPosition == IconPositionEnum.left
                           ? 4
                           : 0),
               child: Icon(
@@ -291,7 +291,7 @@ class Button extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisSize: block ? MainAxisSize.max : MainAxisSize.min,
                   children: [
-                    iconPosition == iconPositionEnum.left
+                    iconPosition == IconPositionEnum.left
                         ? iconWidget()
                         : Container(),
                     ConstrainedBox(
@@ -306,10 +306,10 @@ class Button extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            color: feColor, fontSize: fontSizes[buttonSize]),
+                            color: feColor, fontSize: fontSizes[ButtonSize]),
                       ),
                     ),
-                    iconPosition == iconPositionEnum.right
+                    iconPosition == IconPositionEnum.right
                         ? iconWidget()
                         : Container(),
                   ]),

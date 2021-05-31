@@ -71,4 +71,7 @@ class Style {
       EdgeInsets.symmetric(horizontal: 7);
   static EdgeInsetsGeometry buttonMiniPadding =
       EdgeInsets.symmetric(horizontal: 3);
+
+  /***** Cell Style ******/
+
 }
