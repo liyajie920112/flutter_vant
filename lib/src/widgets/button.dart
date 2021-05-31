@@ -1,22 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vant/src/style/style.dart';
 
-// 按钮类型枚举
+/// button type enum
 enum buttonType { primary, info, default_, warning, danger }
-// 按钮大小枚举
+
+/// button size enum
 enum buttonSize { large, normal, small, mini }
 
+/// button color type enum
+enum buttonColorType { backgroundColor, textColor, borderColor }
+
+/// icon position
+enum iconPositionEnum { left, right }
+
 class Button extends StatelessWidget {
-  final String? text; // 文案
-  final buttonType type; // 按钮类型
-  final bool plain; // 是否为朴素按钮
+  /// button text
+  final String? text;
+
+  /// button type
+  final buttonType type;
+
+  /// is plain button
+  final bool plain;
+
+  /// button size
   final buttonSize size;
-  final bool hairline; // 是否是细边框
-  final bool square; // 是否是方形按钮
-  final bool round; // 是否是圆形按钮
-  final IconData? icon; // 按钮组件
-  final bool block; // 是否是块级元素
-  final dynamic color; // 自定义颜色
+
+  /// is hairline button
+  final bool hairline;
+
+  /// is square button
+  final bool square;
+
+  /// is round button
+  final bool round;
+
+  /// button icon
+  final IconData? icon;
+
+  /// is block button
+  final bool block;
+
+  /// custom button background color
+  final dynamic color;
+
+  /// text color
+  final Color? textColor;
+
+  /// border color
+  final Color? borderColor;
+
+  /// border radius
+  final double borderRadius;
+
+  /// is loading button
+  final bool loading;
+
+  /// loading text
+  final String? loadingText;
+
+  /// button icon position [left, right]
+  final iconPositionEnum iconPosition;
+
+  /// is disabled button
+  final bool disabled;
+
+  final Function? onClick;
   Button(
       {Key? key,
       this.type: buttonType.default_,
@@ -28,34 +77,42 @@ class Button extends StatelessWidget {
       this.icon,
       this.block: false,
       this.color,
+      this.textColor,
+      this.borderColor,
+      this.borderRadius: Style.buttonBorderRadius,
+      this.loading: false,
+      this.loadingText,
+      this.iconPosition: iconPositionEnum.left,
+      this.disabled: false,
+      this.onClick,
       this.text})
       : super(key: key);
 
   Map<buttonType, dynamic> colors = {
-    buttonType.default_: {
-      'bgColor': Style.buttonDefaultBgColor,
-      'bdColor': Style.buttonDefaultBdColor,
-      'color': Style.buttonDefaultColor
+    buttonType.default_: <buttonColorType, Color>{
+      buttonColorType.backgroundColor: Style.buttonDefaultBgColor,
+      buttonColorType.borderColor: Style.buttonDefaultBdColor,
+      buttonColorType.textColor: Style.buttonDefaultColor
     },
     buttonType.primary: {
-      'bgColor': Style.buttonPrimaryBgColor,
-      'bdColor': Style.buttonPrimaryBdColor,
-      'color': Style.buttonPrimaryColor
+      buttonColorType.backgroundColor: Style.buttonPrimaryBgColor,
+      buttonColorType.borderColor: Style.buttonPrimaryBdColor,
+      buttonColorType.textColor: Style.buttonPrimaryColor
     },
     buttonType.info: {
-      'bgColor': Style.buttonInfoBgColor,
-      'bdColor': Style.buttonInfoBdColor,
-      'color': Style.buttonInfoColor
+      buttonColorType.backgroundColor: Style.buttonInfoBgColor,
+      buttonColorType.borderColor: Style.buttonInfoBdColor,
+      buttonColorType.textColor: Style.buttonInfoColor
     },
     buttonType.danger: {
-      'bgColor': Style.buttonDangerBgColor,
-      'bdColor': Style.buttonDangerBdColor,
-      'color': Style.buttonDangerColor
+      buttonColorType.backgroundColor: Style.buttonDangerBgColor,
+      buttonColorType.borderColor: Style.buttonDangerBdColor,
+      buttonColorType.textColor: Style.buttonDangerColor
     },
     buttonType.warning: {
-      'bgColor': Style.buttonWarningBgColor,
-      'bdColor': Style.buttonWarningBdColor,
-      'color': Style.buttonWarningColor
+      buttonColorType.backgroundColor: Style.buttonWarningBgColor,
+      buttonColorType.borderColor: Style.buttonWarningBdColor,
+      buttonColorType.textColor: Style.buttonWarningColor
     },
   };
 
@@ -73,7 +130,7 @@ class Button extends StatelessWidget {
     buttonSize.mini: Style.buttonMiniFontSize,
   };
 
-  Map<buttonSize, double> paddings = {
+  Map<buttonSize, EdgeInsetsGeometry> paddings = {
     buttonSize.large: Style.buttonLargePadding,
     buttonSize.normal: Style.buttonNormalPadding,
     buttonSize.small: Style.buttonSmallPadding,
@@ -88,55 +145,167 @@ class Button extends StatelessWidget {
     double iconFontSize = fontSizes[size]! + 6;
 
     // 背景色
-    Color bgColor = plain
-        ? Style.buttonPlainBgColor
-        : color != null
+    Color? bgColor;
+    Gradient? gradientColor;
+    bool isGradient = color is Gradient;
+    if (plain) {
+      bgColor = Style.buttonPlainBgColor;
+    } else {
+      if (color != null) {
+        if (isGradient) {
+          // 如果是渐变色
+          bgColor = null;
+          gradientColor = color;
+        } else {
+          bgColor = color;
+        }
+      } else {
+        bgColor = color != null
             ? color
-            : colors[this.type]['bgColor'];
+            : colors[type][buttonColorType.backgroundColor];
+      }
+    }
     // 前景色
-    Color fColor = plain
-        ? color != null
-            ? color
-            : colors[this.type]['bgColor']
-        : colors[this.type]['color'];
+    Color? feColor;
+    if (plain) {
+      feColor = textColor != null
+          ? textColor
+          : colors[type][buttonColorType.backgroundColor];
+    } else {
+      feColor = textColor != null
+          ? textColor
+          : colors[type][buttonColorType.textColor];
+    }
     // 边框颜色
-    Color bdColor = color != null ? color : colors[this.type]['bdColor'];
-    return Container(
-      height: sizes[this.size],
-      padding: EdgeInsets.only(left: paddings[size]!, right: paddings[size]!),
-      decoration: BoxDecoration(
-          color: bgColor,
-          border: Border.all(
-              color: bdColor,
-              width: hairline
-                  ? Style.buttonHairlineBorderWidth
-                  : Style.buttonBorderWidth),
-          borderRadius: BorderRadius.circular(this.square
-              ? Style.buttonSquareBorderRadius
-              : this.round
-                  ? borderRoundRadius
-                  : Style.buttonBorderRadius)),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: block ? MainAxisSize.max : MainAxisSize.min,
-          children: [
-            icon != null
-                ? Container(
-                    margin: EdgeInsets.only(right: this.text == null ? 0 : 4),
-                    child: Icon(
-                      icon,
-                      size: iconFontSize,
-                      color: fColor,
-                    ),
-                  )
-                : Container(),
-            Text(
-              this.text == null ? '' : this.text!,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: fColor, fontSize: fontSizes[buttonSize]),
+    Color? bdColor;
+    if (isGradient) {
+      bdColor = Colors.transparent;
+    } else {
+      if (plain) {
+        if (color != null) {
+          bdColor = color;
+        } else {
+          if (textColor != null) {
+            bdColor = textColor;
+          } else {
+            bdColor = colors[type][buttonColorType.backgroundColor];
+          }
+        }
+      } else {
+        bdColor =
+            color != null ? color : colors[type][buttonColorType.borderColor];
+      }
+    }
+
+    Widget iconWidget() {
+      if (loading) {
+        return Container(
+          margin: EdgeInsets.only(right: loadingText != null ? 4 : 0),
+          child: SizedBox(
+            height: fontSizes[size],
+            width: fontSizes[size],
+            child: CircularProgressIndicator(
+              color: feColor,
+              strokeWidth: Style.buttonBorderWidth,
+            ),
+          ),
+        );
+      }
+      return icon != null
+          ? Container(
+              margin: EdgeInsets.only(
+                  left: this.text == null
+                      ? 0
+                      : iconPosition == iconPositionEnum.right
+                          ? 4
+                          : 0,
+                  right: this.text == null
+                      ? 0
+                      : iconPosition == iconPositionEnum.left
+                          ? 4
+                          : 0),
+              child: Icon(
+                icon,
+                size: iconFontSize,
+                color: feColor,
+              ),
             )
-          ]),
+          : Container();
+    }
+
+    String? _text;
+    if (loadingText != null) {
+      _text = loadingText;
+    } else {
+      _text = text != null ? text : '';
+    }
+    return Opacity(
+      opacity: disabled ? Style.buttonDisabledOpacity : 1,
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+            color: bgColor,
+            gradient: gradientColor,
+            border: Border.all(
+                color: bdColor!,
+                width: hairline
+                    ? Style.buttonHairlineBorderWidth
+                    : Style.buttonBorderWidth),
+            borderRadius: BorderRadius.circular(this.square
+                ? Style.buttonSquareBorderRadius
+                : this.round
+                    ? borderRoundRadius
+                    : borderRadius)),
+        child: Material(
+          type: MaterialType.transparency,
+          child: InkWell(
+            focusColor: disabled || loading
+                ? Style.transparent
+                : Theme.of(context).focusColor,
+            highlightColor: disabled || loading
+                ? Style.transparent
+                : Theme.of(context).highlightColor,
+            hoverColor: disabled || loading
+                ? Style.transparent
+                : Theme.of(context).hoverColor,
+            splashColor: disabled || loading
+                ? Style.transparent
+                : Theme.of(context).splashColor,
+            borderRadius: BorderRadius.circular(this.square
+                ? Style.buttonSquareBorderRadius
+                : this.round
+                    ? borderRoundRadius
+                    : borderRadius),
+            onTap: () {
+              if (disabled || loading || onClick == null) {
+                return;
+              }
+              onClick!();
+            },
+            child: Container(
+              height: sizes[size],
+              padding: paddings[size],
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: block ? MainAxisSize.max : MainAxisSize.min,
+                  children: [
+                    iconPosition == iconPositionEnum.left
+                        ? iconWidget()
+                        : Container(),
+                    Text(
+                      _text!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: feColor, fontSize: fontSizes[buttonSize]),
+                    ),
+                    iconPosition == iconPositionEnum.right
+                        ? iconWidget()
+                        : Container(),
+                  ]),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

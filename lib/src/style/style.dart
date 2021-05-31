@@ -8,16 +8,20 @@ class Convert {
 }
 
 class Style {
+  static const Color transparent = Color(0x00000000);
+  static const double buttonDisabledOpacity = 0.5;
+  // 按钮默认文案颜色
+  static Color buttonDefaultTextColor = Convert.toColor('#ffffff');
   // 朴素按钮背景色
   static Color buttonPlainBgColor = Convert.toColor('#ffffff');
 
   // 边框高度
-  static double buttonBorderWidth = 1;
-  static double buttonHairlineBorderWidth = 0.5;
+  static const double buttonBorderWidth = 1;
+  static const double buttonHairlineBorderWidth = 0.5;
 
   // 边框圆角
-  static double buttonBorderRadius = 2;
-  static double buttonSquareBorderRadius = 0;
+  static const double buttonBorderRadius = 2;
+  static const double buttonSquareBorderRadius = 0;
 
   // 按钮背景颜色
   static Color buttonDefaultBgColor = Convert.toColor('#ffffff');
@@ -41,26 +45,30 @@ class Style {
   static Color buttonWarningColor = Convert.toColor('#ffffff');
 
   // 按钮大小
-  static double buttonLargeHeight = 48;
-  static double buttonNormalHeight = 42;
-  static double buttonSmallHeight = 30;
-  static double buttonMiniHeight = 22;
+  static const double buttonLargeHeight = 48;
+  static const double buttonNormalHeight = 42;
+  static const double buttonSmallHeight = 30;
+  static const double buttonMiniHeight = 22;
 
   // 按钮字体大小
-  static double buttonLargeFontSize = 16;
-  static double buttonNormalFontSize = 14;
-  static double buttonSmallFontSize = 12;
-  static double buttonMiniFontSize = 10;
+  static const double buttonLargeFontSize = 16;
+  static const double buttonNormalFontSize = 14;
+  static const double buttonSmallFontSize = 12;
+  static const double buttonMiniFontSize = 10;
 
   // 按钮icon字体大小
-  static double buttonLargeIconFontSize = 16;
-  static double buttonNormalIconFontSize = 14;
-  static double buttonSmallIconFontSize = 12;
-  static double buttonMiniIconFontSize = 10;
+  static const double buttonLargeIconFontSize = 16;
+  static const double buttonNormalIconFontSize = 14;
+  static const double buttonSmallIconFontSize = 12;
+  static const double buttonMiniIconFontSize = 10;
 
   // 按钮padding
-  static double buttonLargePadding = 16;
-  static double buttonNormalPadding = 14;
-  static double buttonSmallPadding = 7;
-  static double buttonMiniPadding = 3;
+  static EdgeInsetsGeometry buttonLargePadding =
+      EdgeInsets.symmetric(horizontal: 16);
+  static EdgeInsetsGeometry buttonNormalPadding =
+      EdgeInsets.symmetric(horizontal: 14);
+  static EdgeInsetsGeometry buttonSmallPadding =
+      EdgeInsets.symmetric(horizontal: 7);
+  static EdgeInsetsGeometry buttonMiniPadding =
+      EdgeInsets.symmetric(horizontal: 3);
 }
