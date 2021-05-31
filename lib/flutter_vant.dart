@@ -1,6 +1,7 @@
 library flutter_vant;
 
 export './src/widgets/button.dart';
+export './src/widgets/cell.dart';
 
 /// A Calculator.
 class Calculator {

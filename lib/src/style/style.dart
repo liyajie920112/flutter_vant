@@ -74,4 +74,9 @@ class Style {
 
   /***** Cell Style ******/
 
+  static const double cellNormalFontSize = 14;
+  static const double cellLargeFontSize = 16;
+
+  static Color cellTitleColor = Convert.toColor('#323233');
+  static Color cellValueColor = Convert.toColor('#969799');
 }

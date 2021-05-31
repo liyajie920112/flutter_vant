@@ -51,11 +51,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
               ),
-              Cell(
+              _Cell(
                 title: '按钮',
                 onClick: () => {Navigator.pushNamed(context, '/button')},
               ),
-              Cell(
+              _Cell(
                 title: 'Cell单元格',
                 onClick: () => {Navigator.pushNamed(context, '/cell')},
               )
@@ -65,10 +65,10 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Cell extends StatelessWidget {
+class _Cell extends StatelessWidget {
   final String title;
   final Function? onClick;
-  const Cell({Key? key, required this.title, required this.onClick})
+  const _Cell({Key? key, required this.title, required this.onClick})
       : super(key: key);
 
   @override

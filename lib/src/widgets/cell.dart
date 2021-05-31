@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vant/src/style/style.dart';
 
 enum CellSize { normal, large }
 
@@ -42,10 +43,57 @@ class Cell extends StatelessWidget {
       this.arrowDirection: ArrowDirection.right})
       : super(key: key);
 
+  get _title {
+    if (title != null) {
+      return title;
+    }
+    return '';
+  }
+
+  get _value {
+    if (value != null) {
+      return value;
+    }
+    return '';
+  }
+
+  List<Widget> topWidget() {
+    List<Widget> list = [];
+    if (_title != '') {
+      list.add(Text(_title,
+          style: TextStyle(
+              fontSize: Style.cellNormalFontSize,
+              color: Style.cellTitleColor)));
+    }
+    if (_value != '') {
+      list.add(Text(_value,
+          style: TextStyle(
+              fontSize: Style.cellNormalFontSize,
+              color: Style.cellValueColor)));
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Container(
+            height: 44,
+            padding: EdgeInsets.symmetric(horizontal: 16),
+            decoration: BoxDecoration(border: Border.all()),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: topWidget(),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
