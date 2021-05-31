@@ -283,6 +283,8 @@ class Button extends StatelessWidget {
             },
             child: Container(
               height: sizes[size],
+              constraints:
+                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
               padding: paddings[size],
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -292,11 +294,20 @@ class Button extends StatelessWidget {
                     iconPosition == iconPositionEnum.left
                         ? iconWidget()
                         : Container(),
-                    Text(
-                      _text!,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: feColor, fontSize: fontSizes[buttonSize]),
+                    ConstrainedBox(
+                      constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width -
+                              paddings[size]!.horizontal * 2 -
+                              iconFontSize),
+                      child: Text(
+                        _text!,
+                        maxLines: 1,
+                        softWrap: false,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            color: feColor, fontSize: fontSizes[buttonSize]),
+                      ),
                     ),
                     iconPosition == iconPositionEnum.right
                         ? iconWidget()

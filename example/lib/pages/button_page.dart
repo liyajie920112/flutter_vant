@@ -288,7 +288,7 @@ class ButtonPage extends StatelessWidget {
                         type: buttonType.primary,
                       ),
                       Button(
-                        text: '自定义背景颜色朴素按钮',
+                        text: '自定义背景颜色😻朴素按钮',
                         textColor: Color(0xff000fff),
                         plain: true,
                         type: buttonType.primary,
