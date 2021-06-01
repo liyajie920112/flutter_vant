@@ -72,11 +72,33 @@ class Style {
   static EdgeInsetsGeometry buttonMiniPadding =
       EdgeInsets.symmetric(horizontal: 3);
 
-  /***** Cell Style ******/
-
+  /// *** Cell Style ******/
   static const double cellNormalFontSize = 14;
   static const double cellLargeFontSize = 16;
 
+  static const double cellNormalMinHeight = 24;
+  static const double cellLargeMinHeight = 24;
+
+  static const EdgeInsetsGeometry? cellNormalPadding =
+      EdgeInsets.symmetric(horizontal: 16);
+  static const EdgeInsetsGeometry? cellLargePadding =
+      EdgeInsets.symmetric(horizontal: 16);
+
+  static const EdgeInsetsGeometry? cellNormalVPadding =
+      EdgeInsets.symmetric(vertical: 10);
+  static const EdgeInsetsGeometry? cellLargeVPadding =
+      EdgeInsets.symmetric(vertical: 12);
+
   static Color cellTitleColor = Convert.toColor('#323233');
   static Color cellValueColor = Convert.toColor('#969799');
+
+  // label style
+  static Color cellLabelColor = Convert.toColor('#969799');
+  static const double cellLabelFontSize = 12;
+
+  static Color cellBorderColor = Convert.toColor('#ebedf0');
+  static const double cellBorderHeight = 0.5;
+
+  static const double cellIconWidth = 16;
+  static const double cellRightIconFontSize = 20;
 }

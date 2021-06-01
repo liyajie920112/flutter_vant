@@ -22,6 +22,32 @@ class CellPage extends StatelessWidget {
             Cell(
               value: '内容',
             ),
+            Cell(
+              title: '单元格大小',
+              size: CellSize.large,
+              value: '内容',
+            ),
+            Cell(
+              title: '单元格',
+              label: '描述信息',
+              value: '内容',
+            ),
+            Cell(
+              title: '单元格',
+              label: '描述信息',
+              center: true,
+              value: '内容',
+            ),
+            Cell(
+              title: '单元格单元格单元格单元格单元格',
+              icon: Icons.location_on_outlined,
+              value: '内容',
+            ),
+            Cell(
+              title: '单元格',
+              value: '内容',
+              isLink: true,
+            ),
           ],
         ),
       ),
