@@ -101,4 +101,9 @@ class Style {
 
   static const double cellIconWidth = 16;
   static const double cellRightIconFontSize = 20;
+
+  static Color cellGroupTitleColor = Convert.toColor('#969799');
+  static const double cellGroupTitleFontSize = 14;
+  static const EdgeInsetsGeometry cellGroupTitlePadding =
+      EdgeInsets.only(top: 16, bottom: 8, left: 16, right: 16);
 }

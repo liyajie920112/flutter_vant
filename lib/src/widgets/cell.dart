@@ -20,7 +20,7 @@ class Cell extends StatelessWidget {
   final String? label;
   final CellSize size;
   final IconData? icon;
-  final bool border;
+  bool border;
 
   /// click feedback
   final bool clickable;

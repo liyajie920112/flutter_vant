@@ -1,4 +1,5 @@
 import 'package:example/pages/button_page.dart';
+import 'package:example/pages/cell_group_page.dart';
 import 'package:example/pages/cell_page.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
       home: MyHomePage(title: 'Flutter Vant'),
       routes: {
         '/button': (context) => ButtonPage(),
-        '/cell': (context) => CellPage()
+        '/cell': (context) => CellPage(),
+        '/cell_group': (context) => CellGroupPage(),
       },
     );
   }
@@ -58,6 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
               _Cell(
                 title: 'Cell单元格',
                 onClick: () => {Navigator.pushNamed(context, '/cell')},
+              ),
+              _Cell(
+                title: 'Cell Group',
+                onClick: () => {Navigator.pushNamed(context, '/cell_group')},
               )
             ],
           ),
