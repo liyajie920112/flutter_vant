@@ -17,10 +17,18 @@ class CellPage extends StatelessWidget {
           children: [
             Cell(
               title: '单元格',
-              value: '内容',
+              value: '内容内容内容内容内容内容内容内容',
+              clickable: true,
+              onClick: () {
+                print('dianji');
+              },
             ),
             Cell(
               value: '内容',
+              clickable: true,
+              onClick: () {
+                print('dianji2');
+              },
             ),
             Cell(
               title: '单元格大小',
@@ -33,20 +41,50 @@ class CellPage extends StatelessWidget {
               value: '内容',
             ),
             Cell(
-              title: '单元格',
+              title: '单元格 center',
               label: '描述信息',
               center: true,
               value: '内容',
             ),
             Cell(
-              title: '单元格单元格单元格单元格单元格',
+              title: '单元格 icon',
               icon: Icons.location_on_outlined,
               value: '内容',
             ),
             Cell(
-              title: '单元格',
+              title: '单元格link',
+              value: '内容内容内容内容内容内容',
+              isLink: true,
+            ),
+            Cell(
+              title: '单元格下箭头',
+              value: '内容',
+              arrowDirection: ArrowDirection.down,
+              isLink: true,
+            ),
+            Cell(
+              title: '单元格 border: false',
               value: '内容',
               isLink: true,
+              border: false,
+            ),
+            Cell(
+              title: '单元格 slotTitle',
+              value: '内容',
+              isLink: true,
+              slotTitle: Container(
+                padding: EdgeInsets.symmetric(horizontal: 2, vertical: 1),
+                decoration: BoxDecoration(
+                    color: Colors.red, borderRadius: BorderRadius.circular(4)),
+                child: Text(
+                  '标签',
+                  style: TextStyle(color: Colors.white, fontSize: 10),
+                ),
+              ),
+            ),
+            Cell(
+              title: '单元格 slot right icon',
+              slotRightIcon: Icons.search,
             ),
           ],
         ),

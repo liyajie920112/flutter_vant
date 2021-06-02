@@ -79,9 +79,9 @@ class Style {
   static const double cellNormalMinHeight = 24;
   static const double cellLargeMinHeight = 24;
 
-  static const EdgeInsetsGeometry? cellNormalPadding =
+  static const EdgeInsetsGeometry? cellNormalHPadding =
       EdgeInsets.symmetric(horizontal: 16);
-  static const EdgeInsetsGeometry? cellLargePadding =
+  static const EdgeInsetsGeometry? cellLargeHPadding =
       EdgeInsets.symmetric(horizontal: 16);
 
   static const EdgeInsetsGeometry? cellNormalVPadding =

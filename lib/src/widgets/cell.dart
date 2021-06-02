@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_vant/src/style/style.dart';
 
 enum CellSize { normal, large }
@@ -9,7 +8,7 @@ enum ArrowDirection { left, right, up, down }
 enum CellPropType {
   fontSize,
   minHeight,
-  cellPadding,
+  cellHPadding,
   cellVPadding,
   leftIcon,
   rightIcon
@@ -38,6 +37,11 @@ class Cell extends StatelessWidget {
   /// arrow direction
   final ArrowDirection arrowDirection;
 
+  final Widget? slotTitle;
+
+  final IconData? slotRightIcon;
+
+  final Function? onClick;
   Cell(
       {Key? key,
       this.title,
@@ -50,6 +54,9 @@ class Cell extends StatelessWidget {
       this.isLink: false,
       this.required: false,
       this.center: false,
+      this.slotTitle,
+      this.slotRightIcon,
+      this.onClick,
       this.arrowDirection: ArrowDirection.right})
       : super(key: key);
 
@@ -74,22 +81,22 @@ class Cell extends StatelessWidget {
       case ArrowDirection.left:
         return Icons.chevron_left;
       case ArrowDirection.up:
-        return Icons.expand_more;
-      case ArrowDirection.down:
         return Icons.expand_less;
+      case ArrowDirection.down:
+        return Icons.expand_more;
     }
   }
 
   Map<CellSize, dynamic> cellProps = {
     CellSize.normal: <CellPropType, dynamic>{
       CellPropType.fontSize: Style.cellNormalFontSize,
-      CellPropType.cellPadding: Style.cellNormalPadding,
+      CellPropType.cellHPadding: Style.cellNormalHPadding,
       CellPropType.minHeight: Style.cellNormalMinHeight,
       CellPropType.cellVPadding: Style.cellNormalVPadding
     },
     CellSize.large: <CellPropType, dynamic>{
       CellPropType.fontSize: Style.cellLargeFontSize,
-      CellPropType.cellPadding: Style.cellLargePadding,
+      CellPropType.cellHPadding: Style.cellLargeHPadding,
       CellPropType.minHeight: Style.cellLargeMinHeight,
       CellPropType.cellVPadding: Style.cellLargeVPadding
     },
@@ -114,11 +121,28 @@ class Cell extends StatelessWidget {
       width: Style.cellIconWidth,
       margin: EdgeInsets.only(left: 4),
       child: Icon(
-        _arrowIcon,
+        slotRightIcon != null ? slotRightIcon : _arrowIcon,
         size: Style.cellRightIconFontSize,
         color: Style.cellValueColor,
       ),
     );
+  }
+
+  List<Widget> titleRow() {
+    List<Widget> list = [];
+    list.add(Text(
+      _title,
+      style: TextStyle(
+          height: cellProps[size][CellPropType.minHeight] /
+              cellProps[size][CellPropType.fontSize],
+          leadingDistribution: TextLeadingDistribution.even,
+          fontSize: cellProps[size][CellPropType.fontSize],
+          color: Style.cellTitleColor),
+    ));
+    if (slotTitle != null) {
+      list.add(Container(margin: EdgeInsets.only(left: 4), child: slotTitle!));
+    }
+    return list;
   }
 
   List<Widget> topWidget() {
@@ -131,14 +155,8 @@ class Cell extends StatelessWidget {
         Container(
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              _title,
-              style: TextStyle(
-                  height: cellProps[size][CellPropType.minHeight] /
-                      cellProps[size][CellPropType.fontSize],
-                  leadingDistribution: TextLeadingDistribution.even,
-                  fontSize: cellProps[size][CellPropType.fontSize],
-                  color: Style.cellTitleColor),
+            child: Row(
+              children: titleRow(),
             ),
           ),
         )
@@ -174,6 +192,9 @@ class Cell extends StatelessWidget {
                 child: Text(
                   _value,
                   style: TextStyle(
+                      height: cellProps[size][CellPropType.minHeight] /
+                          cellProps[size][CellPropType.fontSize],
+                      leadingDistribution: TextLeadingDistribution.even,
                       fontSize: cellProps[size][CellPropType.fontSize],
                       color: list.length == 0
                           ? Style.cellTitleColor
@@ -181,31 +202,59 @@ class Cell extends StatelessWidget {
                 ))),
       ));
     }
-    if (isLink) {
+    if (isLink || slotRightIcon != null) {
       list.add(getRightIcon());
     }
     return list;
   }
 
+  Border? get _border {
+    if (!border) {
+      return null;
+    }
+    return Border(
+        bottom: BorderSide(
+            width: Style.cellBorderHeight, color: Style.cellBorderColor));
+  }
+
   @override
   Widget build(BuildContext context) {
-    debugPaintSizeEnabled = true;
-    return Container(
-        padding: cellProps[size][CellPropType.cellPadding],
+    return Material(
+      type: MaterialType.transparency,
+      child: InkWell(
+        onTap: () {
+          if (onClick == null) {
+            return;
+          }
+          onClick!();
+        },
+        focusColor: !clickable && !isLink
+            ? Style.transparent
+            : Theme.of(context).focusColor,
+        highlightColor: !clickable && !isLink
+            ? Style.transparent
+            : Theme.of(context).highlightColor,
+        hoverColor: !clickable && !isLink
+            ? Style.transparent
+            : Theme.of(context).hoverColor,
+        splashColor: !clickable && !isLink
+            ? Style.transparent
+            : Theme.of(context).splashColor,
         child: Container(
-          padding: cellProps[size][CellPropType.cellVPadding],
-          decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(
-                      width: Style.cellBorderHeight,
-                      color: Style.cellBorderColor))),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment:
-                center ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: topWidget(),
-          ),
-        ));
+            padding: cellProps[size][CellPropType.cellHPadding],
+            child: Container(
+              padding: cellProps[size][CellPropType.cellVPadding],
+              decoration: BoxDecoration(border: _border),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: center
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: topWidget(),
+              ),
+            )),
+      ),
+    );
   }
 }
