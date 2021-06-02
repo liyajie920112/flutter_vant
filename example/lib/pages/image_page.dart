@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vant/flutter_vant.dart';
-import 'package:flutter_vant/src/widgets/image.dart';
 
 class ImagePage extends StatelessWidget {
   const ImagePage({Key? key}) : super(key: key);
@@ -15,7 +13,6 @@ class ImagePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
           children: [
             Text('基础用法'),
             Image.network(
@@ -174,11 +171,10 @@ class ImagePage extends StatelessWidget {
                         Text('scaleDown')
                       ],
                     ),
-                    // ImageBox.network('https://img01.yzcdn.cn/vant/cat.jpeg')
                   ],
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),

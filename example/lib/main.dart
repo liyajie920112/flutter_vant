@@ -2,6 +2,7 @@ import 'package:example/pages/button_page.dart';
 import 'package:example/pages/cell_group_page.dart';
 import 'package:example/pages/cell_page.dart';
 import 'package:example/pages/image_page.dart';
+import 'package:example/pages/popup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vant/flutter_vant.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/cell': (context) => CellPage(),
         '/cell_group': (context) => CellGroupPage(),
         '/image': (context) => ImagePage(),
+        '/popup': (context) => PopupPage(),
       },
     );
   }
@@ -69,6 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: 'Image',
                   isLink: true,
                   onClick: () => {Navigator.pushNamed(context, '/image')},
+                ),
+                Cell(
+                  title: 'Popup',
+                  isLink: true,
+                  onClick: () => {Navigator.pushNamed(context, '/popup')},
                 ),
               ]),
             ],
