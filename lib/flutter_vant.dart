@@ -3,6 +3,7 @@ library flutter_vant;
 export './src/widgets/button.dart';
 export './src/widgets/cell.dart';
 export './src/widgets/cell_group.dart';
+export './src/widgets/image.dart';
 
 /// A Calculator.
 class Calculator {

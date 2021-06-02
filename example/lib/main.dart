@@ -1,7 +1,9 @@
 import 'package:example/pages/button_page.dart';
 import 'package:example/pages/cell_group_page.dart';
 import 'package:example/pages/cell_page.dart';
+import 'package:example/pages/image_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vant/flutter_vant.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/button': (context) => ButtonPage(),
         '/cell': (context) => CellPage(),
         '/cell_group': (context) => CellGroupPage(),
+        '/image': (context) => ImagePage(),
       },
     );
   }
@@ -46,25 +49,28 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  '基础组件',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              CellGroup(title: '基础组件', children: [
+                Cell(
+                  title: '按钮',
+                  isLink: true,
+                  onClick: () => {Navigator.pushNamed(context, '/button')},
                 ),
-              ),
-              _Cell(
-                title: '按钮',
-                onClick: () => {Navigator.pushNamed(context, '/button')},
-              ),
-              _Cell(
-                title: 'Cell单元格',
-                onClick: () => {Navigator.pushNamed(context, '/cell')},
-              ),
-              _Cell(
-                title: 'Cell Group',
-                onClick: () => {Navigator.pushNamed(context, '/cell_group')},
-              )
+                Cell(
+                  title: 'Cell',
+                  isLink: true,
+                  onClick: () => {Navigator.pushNamed(context, '/cell')},
+                ),
+                Cell(
+                  title: 'CellGroup',
+                  isLink: true,
+                  onClick: () => {Navigator.pushNamed(context, '/cell_group')},
+                ),
+                Cell(
+                  title: 'Image',
+                  isLink: true,
+                  onClick: () => {Navigator.pushNamed(context, '/image')},
+                ),
+              ]),
             ],
           ),
         ));
